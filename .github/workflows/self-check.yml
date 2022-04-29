@@ -17,7 +17,7 @@ jobs:
         uses: ./
 
       - name: Post Action
-        run:
+        run: |
           echo "environment=${{ steps.check.outputs.environment }}"
           echo "key=${{ steps.check.outputs.key }}"
 

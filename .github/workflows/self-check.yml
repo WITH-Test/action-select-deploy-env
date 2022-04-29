@@ -13,5 +13,11 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Check Action
-#        uses: WITH-Test/action-select-deploy-env@main
+        id: self
         uses: ./
+
+      - name: Post Action
+        run:
+          echo "environment=${{ steps.self.environment }}"
+          echo "key=${{ steps.self.key }}"
+

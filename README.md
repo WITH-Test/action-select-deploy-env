@@ -5,6 +5,7 @@ GitHub action to select an environment to use.
 Calculates the necessary values from project metadata.
 
 Takes no inputs.
+
 Outputs:
 - environment: string
   - one of: production, staging, develop, feature

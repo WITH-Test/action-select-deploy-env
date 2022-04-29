@@ -1,10 +1,12 @@
-name: 'Very DogeOps'
-author: 'Carlos Gonzalez'
+name: 'DogeOps to mooooooooon 🚀'
+author: 'Carlos Gonzalez <carlos.gonzalez@with-madrid.com>'
 description: 'Select an environment using repo metadata.'
 
 outputs:
+  key:
+    description: "Computed project key"
   environment:
-    description: "Selected environment"
+    description: "Selected environment, one of production, staging, develop, feature"
 
 runs:
   using: 'node16'

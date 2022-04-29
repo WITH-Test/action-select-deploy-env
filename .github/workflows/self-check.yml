@@ -13,11 +13,11 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Check Action
-        id: self
+        id: check
         uses: ./
 
       - name: Post Action
         run:
-          echo "environment=${{ steps.self.environment }}"
-          echo "key=${{ steps.self.key }}"
+          echo "environment=${{ steps.check.environment }}"
+          echo "key=${{ steps.check.key }}"
 

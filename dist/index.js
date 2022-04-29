@@ -4756,6 +4756,7 @@ function refInfo(ref) {
         " I suggest you bring cookies to the person in charge of builds.");
 }
 async function main() {
+    console.log("GitHub context", _actions_github__WEBPACK_IMPORTED_MODULE_1__.context);
     const project = refInfo(_actions_github__WEBPACK_IMPORTED_MODULE_1__.context.ref);
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput("environment", project.environment);
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput("key", project.key);

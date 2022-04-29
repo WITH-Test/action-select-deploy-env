@@ -73,6 +73,10 @@ function refInfo(ref: string): Project {
 
 
 async function main(): Promise<void> {
+
+  console.log("GitHub context", context)
+
+
   const project = refInfo(context.ref)
   core.setOutput("environment", project.environment);
   core.setOutput("key", project.key)

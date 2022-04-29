@@ -4758,6 +4758,7 @@ function refInfo(ref) {
 async function main() {
     console.log("GitHub context", _actions_github__WEBPACK_IMPORTED_MODULE_1__.context);
     const project = refInfo(_actions_github__WEBPACK_IMPORTED_MODULE_1__.context.ref);
+    console.log("RefInfo:", project);
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput("environment", project.environment);
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput("key", project.key);
 }

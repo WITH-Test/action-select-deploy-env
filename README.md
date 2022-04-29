@@ -1,7 +1,17 @@
-# DogeOps : Prepare Infra
+# DogeOps : select environment
 
-The goal here is to create the necessary resources in AWS to store the image we are going to build.
+GitHub action to select an environment to use.
 
-The infrastructure is handled by Terraform, who loves its `.tfstate` files. To manage those files, we use a S3 backend.
+Calculates the necessary values from project metadata.
 
-This action uses the metadata from the target repo (the one calling this action), and minimal basic configuration from the project (`.dogeops` file) to dynamically configure Terraform to the right backend for the project. 
+Takes no inputs.
+Outputs:
+- environment: string
+  - one of: production, staging, develop, feature
+- key: string
+  - computed from the ref type and name
+    - tag: key is the tag name
+    - branch:
+      - main or master: key is `main`
+      - develop: key is `develop`
+      - feature/*: key is `dev_###` where `###` is the feature number, using standard felix naming conventions

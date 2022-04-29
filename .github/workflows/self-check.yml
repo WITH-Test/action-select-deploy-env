@@ -7,6 +7,11 @@ on:
 
 jobs:
   check_action:
+    runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       - name: Check Action
+#        uses: WITH-Test/action-select-deploy-env@main
         uses: ./

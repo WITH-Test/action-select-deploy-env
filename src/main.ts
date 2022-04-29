@@ -1,12 +1,13 @@
 import * as core from "@actions/core";
 import {context} from "@actions/github";
 
+const FEATURE_RE: RegExp = new RegExp('^feature\/[a-z]+(\d+)_')
+const VERSION_RE: RegExp = new RegExp('^v?\d+\.\d+\.\d+$')
+const UNSAFE_CHAR: RegExp = new RegExp('[^\da-z]+')
+
 process.on("unhandledRejection", handleError);
 main().catch(handleError);
 
-const FEATURE_RE: RegExp = new RegExp('^feature/[a-z]+(\d+)_')
-const VERSION_RE: RegExp = new RegExp('^v?\d+\.\d+\.\d+$')
-const UNSAFE_CHAR: RegExp = new RegExp('[^\da-z]+')
 
 async function generateInfra(ref: string): Promise<string> {
   const isTag = ref.startsWith('refs/tags/')

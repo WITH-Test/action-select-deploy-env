@@ -4701,11 +4701,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_actions_github__WEBPACK_IMPORTED_MODULE_1__);
 
 
-process.on("unhandledRejection", handleError);
-main().catch(handleError);
-const FEATURE_RE = new RegExp('^feature/[a-z]+(\d+)_');
+const FEATURE_RE = new RegExp('^feature\/[a-z]+(\d+)_');
 const VERSION_RE = new RegExp('^v?\d+\.\d+\.\d+$');
 const UNSAFE_CHAR = new RegExp('[^\da-z]+');
+process.on("unhandledRejection", handleError);
+main().catch(handleError);
 async function generateInfra(ref) {
     const isTag = ref.startsWith('refs/tags/');
     if (isTag) {

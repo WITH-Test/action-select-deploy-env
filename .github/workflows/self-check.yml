@@ -18,6 +18,6 @@ jobs:
 
       - name: Post Action
         run:
-          echo "environment=${{ steps.check.environment }}"
-          echo "key=${{ steps.check.key }}"
+          echo "environment=${{ steps.check.outputs.environment }}"
+          echo "key=${{ steps.check.outputs.key }}"
 

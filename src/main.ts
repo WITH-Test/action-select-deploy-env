@@ -17,8 +17,8 @@ async function generateInfra(ref: string): Promise<string> {
 
     return "production"
   }
-  const errorMsg = "Something went terribly wrong, trying to generate " +
-    `sub-domain for branch {ref}, but this pattern of branch doesn't exist.` +
+  const errorMsg = "Something went terribly wrong, trying to select " +
+    "an environment from ref {ref}, but this pattern is not recognized." +
     " I suggest you bring cookies to the person in charge of builds."
 
   const isBranch = ref.startsWith('refs/heads/')

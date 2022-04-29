@@ -1,0 +1,11 @@
+name: 'Very DogeOps'
+author: 'Carlos Gonzalez'
+description: 'Select an environment using repo metadata.'
+
+outputs:
+  environment:
+    description: "Selected environment"
+
+runs:
+  using: 'node16'
+  main: 'dist/index.js'

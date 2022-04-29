@@ -1,0 +1,12 @@
+name: 'Environment selection'
+
+on:
+  push:
+  workflow_call:
+
+
+jobs:
+  check_action:
+    steps:
+      - name: Check Action
+        uses: ./

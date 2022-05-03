@@ -15,9 +15,11 @@ jobs:
       - name: Check Action
         id: check
         uses: ./
+        with:
+          deploy_unit: 'front'
 
       - name: Post Action
         run: |
           echo "environment=${{ steps.check.outputs.environment }}"
           echo "key=${{ steps.check.outputs.key }}"
-
+          echo "project=${{ steps.check.outputs.project }}"

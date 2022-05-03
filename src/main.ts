@@ -1,5 +1,6 @@
 import * as core from "@actions/core";
 import {context} from "@actions/github";
+import {Context} from "@actions/github/lib/context";
 
 const FEATURE_RE: RegExp = /^feature\/[a-z]+(?<number>\d+)_/g
 const VERSION_RE: RegExp = /^v?\d+\.\d+\.\d+$/
@@ -8,12 +9,12 @@ const UNSAFE_CHAR: RegExp = /[^\da-z]+/g
 process.on("unhandledRejection", handleError);
 main().catch(handleError);
 
-interface Project {
+interface Infra {
   environment: string
   key: string
 }
 
-function refInfo(ref: string): Project {
+function refInfo(ref: string): Infra {
   const isTag = ref.startsWith('refs/tags/')
   if (isTag) {
     const namedTag = ref.replace(/^refs\/tags\//, '')
@@ -71,16 +72,28 @@ function refInfo(ref: string): Project {
     " I suggest you bring cookies to the person in charge of builds.")
 }
 
+function deployUnit(context: Context): string {
+  const repo = context.repo.repo
+  const unit = core.getInput("deploy_unit")
+
+  core.info(`repo name?, ${repo}`)
+  if ('.' !== unit) {
+    return `${repo}/${unit}`.toLowerCase()
+  }
+  return repo.toLowerCase()
+}
 
 async function main(): Promise<void> {
 
   console.log("GitHub context", context)
 
-  const project = refInfo(context.ref)
-  console.log("RefInfo:", project)
+  const infra = refInfo(context.ref)
+  console.log("RefInfo:", infra)
 
-  core.setOutput("environment", project.environment);
-  core.setOutput("key", project.key)
+  core.setOutput("project", deployUnit(context))
+
+  core.setOutput("environment", infra.environment);
+  core.setOutput("key", infra.key)
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

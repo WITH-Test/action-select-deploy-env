@@ -1,12 +1,21 @@
-name: 'DogeOps to mooooooooon 🚀'
+name: 'DogeOps to the mooooooooon 🚀'
 author: 'Carlos Gonzalez <carlos.gonzalez@with-madrid.com>'
-description: 'Select an environment using repo metadata.'
+description: 'Select a target deploy environment using repo metadata.'
+
+inputs:
+  deploy_unit:
+    type: string
+    required: false
+    description: "Unit to deploy (eg. api, front, etc.)"
+    default: '.'
 
 outputs:
+  project:
+    description: "Extracted project name (may result in a /-separated path)"
   key:
     description: "Computed project key"
   environment:
-    description: "Selected environment, one of production, staging, develop, feature"
+    description: "Selected environment. One of: production, staging, develop, feature"
 
 runs:
   using: 'node16'

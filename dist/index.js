@@ -4755,12 +4755,22 @@ function refInfo(ref) {
         `an environment from ref ${friendlyRef}, but this pattern is not recognized.` +
         " I suggest you bring cookies to the person in charge of builds.");
 }
+function deployUnit(context) {
+    const repo = context.repo.repo;
+    const unit = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("deploy_unit");
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`repo name?, ${repo}`);
+    if ('.' !== unit) {
+        return `${repo}/${unit}`.toLowerCase();
+    }
+    return repo.toLowerCase();
+}
 async function main() {
     console.log("GitHub context", _actions_github__WEBPACK_IMPORTED_MODULE_1__.context);
-    const project = refInfo(_actions_github__WEBPACK_IMPORTED_MODULE_1__.context.ref);
-    console.log("RefInfo:", project);
-    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput("environment", project.environment);
-    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput("key", project.key);
+    const infra = refInfo(_actions_github__WEBPACK_IMPORTED_MODULE_1__.context.ref);
+    console.log("RefInfo:", infra);
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput("project", deployUnit(_actions_github__WEBPACK_IMPORTED_MODULE_1__.context));
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput("environment", infra.environment);
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput("key", infra.key);
 }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function handleError(err) {

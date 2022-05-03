@@ -1,6 +1,5 @@
 import * as core from "@actions/core";
 import {context} from "@actions/github";
-import {Context} from "@actions/github/lib/context";
 
 const FEATURE_RE: RegExp = /^feature\/[a-z]+(?<number>\d+)_/g
 const VERSION_RE: RegExp = /^v?\d+\.\d+\.\d+$/
@@ -14,7 +13,7 @@ interface Infra {
   key: string
 }
 
-function refInfo(ref: string): Infra {
+function refInfo({ref}: { ref: string }): Infra {
   const isTag = ref.startsWith('refs/tags/')
   if (isTag) {
     const namedTag = ref.replace(/^refs\/tags\//, '')
@@ -72,11 +71,7 @@ function refInfo(ref: string): Infra {
     " I suggest you bring cookies to the person in charge of builds.")
 }
 
-function deployUnit(context: Context): string {
-  const repo = context.repo.repo
-  const unit = core.getInput("deploy_unit")
-
-  core.info(`repo name?, ${repo}`)
+function deployUnit({repo}: {repo: string}, unit: string): string {
   if ('.' !== unit) {
     return `${repo}/${unit}`.toLowerCase()
   }
@@ -87,10 +82,11 @@ async function main(): Promise<void> {
 
   console.log("GitHub context", context)
 
-  const infra = refInfo(context.ref)
+  const infra = refInfo(context)
   console.log("RefInfo:", infra)
 
-  core.setOutput("project", deployUnit(context))
+  const unit = core.getInput("deploy_unit")
+  core.setOutput("unit", deployUnit(context.repo, unit))
 
   core.setOutput("environment", infra.environment);
   core.setOutput("key", infra.key)

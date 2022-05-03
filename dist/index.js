@@ -4706,7 +4706,7 @@ const VERSION_RE = /^v?\d+\.\d+\.\d+$/;
 const UNSAFE_CHAR = /[^\da-z]+/g;
 process.on("unhandledRejection", handleError);
 main().catch(handleError);
-function refInfo(ref) {
+function refInfo({ ref }) {
     const isTag = ref.startsWith('refs/tags/');
     if (isTag) {
         const namedTag = ref.replace(/^refs\/tags\//, '');
@@ -4755,10 +4755,7 @@ function refInfo(ref) {
         `an environment from ref ${friendlyRef}, but this pattern is not recognized.` +
         " I suggest you bring cookies to the person in charge of builds.");
 }
-function deployUnit(context) {
-    const repo = context.repo.repo;
-    const unit = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("deploy_unit");
-    _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`repo name?, ${repo}`);
+function deployUnit({ repo }, unit) {
     if ('.' !== unit) {
         return `${repo}/${unit}`.toLowerCase();
     }
@@ -4766,9 +4763,10 @@ function deployUnit(context) {
 }
 async function main() {
     console.log("GitHub context", _actions_github__WEBPACK_IMPORTED_MODULE_1__.context);
-    const infra = refInfo(_actions_github__WEBPACK_IMPORTED_MODULE_1__.context.ref);
+    const infra = refInfo(_actions_github__WEBPACK_IMPORTED_MODULE_1__.context);
     console.log("RefInfo:", infra);
-    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput("project", deployUnit(_actions_github__WEBPACK_IMPORTED_MODULE_1__.context));
+    const unit = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("deploy_unit");
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput("unit", deployUnit(_actions_github__WEBPACK_IMPORTED_MODULE_1__.context.repo, unit));
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput("environment", infra.environment);
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput("key", infra.key);
 }

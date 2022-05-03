@@ -22,4 +22,4 @@ jobs:
         run: |
           echo "environment=${{ steps.check.outputs.environment }}"
           echo "key=${{ steps.check.outputs.key }}"
-          echo "project=${{ steps.check.outputs.project }}"
+          echo "unit=${{ steps.check.outputs.unit }}"

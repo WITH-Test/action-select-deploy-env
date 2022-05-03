@@ -10,10 +10,10 @@ inputs:
     default: '.'
 
 outputs:
-  project:
+  unit:
     description: "Extracted project name (may result in a /-separated path)"
   key:
-    description: "Computed project key"
+    description: "Computed branch key"
   environment:
     description: "Selected environment. One of: production, staging, develop, feature"
 

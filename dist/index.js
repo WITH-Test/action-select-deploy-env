@@ -4729,7 +4729,7 @@ function refInfo({ ref }) {
         if ('develop' === branchName) {
             return {
                 environment: "develop",
-                key: branchName
+                key: "develop"
             };
         }
         if (FEATURE_RE.test(branchName)) {

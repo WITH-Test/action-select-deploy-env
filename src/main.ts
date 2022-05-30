@@ -39,7 +39,7 @@ function refInfo({ref}: { ref: string }): Infra {
     if ('develop' === branchName) {
       return {
         environment: "develop",
-        key: branchName
+        key: "develop"
       }
     }
 

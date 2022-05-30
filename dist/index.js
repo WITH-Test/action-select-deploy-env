@@ -4701,7 +4701,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_actions_github__WEBPACK_IMPORTED_MODULE_1__);
 
 
-const FEATURE_RE = /^feature\/[a-z]+(?<number>\d+)_/g;
+const FEATURE_RE = /^feature\/[a-z]+0*(?<number>\d+)_/g;
 const VERSION_RE = /^v?\d+\.\d+\.\d+$/;
 const UNSAFE_CHAR = /[^\da-z]+/g;
 process.on("unhandledRejection", handleError);
@@ -4733,7 +4733,7 @@ function refInfo({ ref }) {
             };
         }
         if (FEATURE_RE.test(branchName)) {
-            // TS regexp (named) capturing groups suck. This is ugly but it works
+            // TS regexp (named) capturing groups suck. This is ugly but it works?
             let branchNumber = "";
             const handleMatch = function (...params /* $0, $1, $2 offset, input, groups */) {
                 // groups is the last argument in the variadic signature.

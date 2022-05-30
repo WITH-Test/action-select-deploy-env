@@ -1,7 +1,7 @@
 import * as core from "@actions/core";
 import {context} from "@actions/github";
 
-const FEATURE_RE: RegExp = /^feature\/[a-z]+(?<number>\d+)_/g
+const FEATURE_RE: RegExp = /^feature\/[a-z]+0*(?<number>\d+)_/g
 const VERSION_RE: RegExp = /^v?\d+\.\d+\.\d+$/
 const UNSAFE_CHAR: RegExp = /[^\da-z]+/g
 
@@ -45,7 +45,7 @@ function refInfo({ref}: { ref: string }): Infra {
 
     if (FEATURE_RE.test(branchName)) {
 
-      // TS regexp (named) capturing groups suck. This is ugly but it works
+      // TS regexp (named) capturing groups suck. This is ugly but it works?
       let branchNumber: string = ""
       const handleMatch = function (...params: any[] /* $0, $1, $2 offset, input, groups */) {
         // groups is the last argument in the variadic signature.
